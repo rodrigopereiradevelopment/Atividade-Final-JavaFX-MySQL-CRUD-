@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="544.0" prefWidth="942.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxmysqlfxml.MainController">
+
+    <bottom>
+        <Label style="-fx-padding: 6; -fx-text-fill: #666;" text="Banco: MySQL (tabela 'students'). Configure em resources/com/example/fxmysqlfxml/config.properties" />
+    </bottom>
+   <top>
+        <VBox prefHeight="13.0" prefWidth="1055.0" spacing="6" BorderPane.alignment="CENTER">
+            <MenuBar>
+                <menus>
+                    <Menu text="Arquivo">
+                        <items>
+                            <MenuItem onAction="#onAtualizar" text="Atualizar" />
+                            <SeparatorMenuItem />
+                            <MenuItem onAction="#onAtualizar" text="Sair" />
+                        </items>
+                    </Menu>
+                    <Menu text="Ajuda">
+                        <items>
+                            <MenuItem onAction="#onSobre" text="Sobre" />
+                        </items>
+                    </Menu>
+                </menus>
+            </MenuBar>
+        </VBox>
+   </top>
+   <center>
+      <AnchorPane prefHeight="490.0" prefWidth="970.0" BorderPane.alignment="CENTER">
+         <children>
+            <TabPane prefHeight="481.0" prefWidth="920.0" style="-fx-background-color: #f3f3f3;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+              <tabs>
+                <Tab closable="false" text="Aluno">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="461.0" prefWidth="927.0">
+                           <children>
+                              <VBox prefHeight="457.0" prefWidth="1016.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+
+                                       <TableView fx:id="tableAluno" prefHeight="416.0" prefWidth="946.0">
+                                           <columns>
+                                               <TableColumn fx:id="colIdAluno" prefWidth="80" text="ID" />
+                                               <TableColumn fx:id="colNomeAluno" prefWidth="231.0" text="Nome" />
+                                               <TableColumn fx:id="colEmailAluno" prefWidth="249.0" text="E-mail" />
+                                          <TableColumn fx:id="colSalaAluno" prefWidth="67.0" text="Sala" />
+                                          <TableColumn fx:id="colModuloAluno" prefWidth="80" text="Modulo" />
+                                          <TableColumn fx:id="colCursoAluno" prefWidth="238.0" text="Curso" />
+                                           </columns>
+                                       </TableView>
+
+                                       <HBox prefWidth="962.0" spacing="8">
+                                           <padding>
+                                               <Insets bottom="8" left="8" right="8" top="8" />
+                                           </padding>
+                                            <Button onAction="#sNovo" text="Novo" />
+                                           <Button onAction="#sEditar" text="Editar" />
+                                           <Button onAction="#sExcluir" text="Excluir" />
+                                           <Button onAction="#onAtualizar" text="Atualizar" />
+                                       </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Professor">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutY="7.0" prefHeight="469.0" prefWidth="1118.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <TableView fx:id="tableProfessor" prefHeight="416.0" prefWidth="946.0">
+                                       <columns>
+                                          <TableColumn fx:id="colIdProfessor" prefWidth="80" text="ID" />
+                                          <TableColumn fx:id="colNomeProfessor" prefWidth="321.0" text="Nome" />
+                                          <TableColumn fx:id="colMateriaProfessor" prefWidth="369.0" text="Materia" />
+                                          <TableColumn fx:id="colPeriodoProfessor" prefWidth="157.0" text="Periodo" />
+                                       </columns>
+                                    </TableView>
+                                    <HBox prefWidth="962.0" spacing="8">
+                                       <padding>
+                                          <Insets bottom="8" left="8" right="8" top="8" />
+                                       </padding>
+                                       <children>
+                                          <Button onAction="#tNovo" text="Novo" />
+                                          <Button onAction="#tEditar" text="Editar" />
+                                          <Button onAction="#tExcluir" text="Excluir" />
+                                          <Button onAction="#onAtualizar" text="Atualizar" />
+                                       </children>
+                                    </HBox>
+                                 </children></VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </AnchorPane>
+   </center>
+
+</BorderPane>

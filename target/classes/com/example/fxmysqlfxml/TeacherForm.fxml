@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fxmysqlfxml.TeacherFormController">
+
+    <center>
+        <GridPane hgap="8" vgap="8">
+            <padding>
+                <Insets bottom="12" left="12" right="12" top="12" />
+            </padding>
+
+            <columnConstraints>
+                <ColumnConstraints prefWidth="80" />
+                <ColumnConstraints prefWidth="260" />
+            </columnConstraints>
+
+            <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="txtId" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+            <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNome" promptText="Nome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <Label text="Materia" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="txtMateria" promptText="Desenvolvimento de Exemplos" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <Label layoutX="22.0" layoutY="92.0" text="Periodo" GridPane.rowIndex="3" />
+         <TextField fx:id="txtPeriodo" layoutX="110.0" layoutY="88.0" promptText="Periodo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </center>
+
+    <bottom>
+        <HBox spacing="8">
+            <padding>
+                <Insets bottom="8" left="8" right="8" top="8" />
+            </padding>
+            <Button onAction="#tSalvar" text="Salvar" />
+            <Button onAction="#tCancelar" text="Cancelar" />
+        </HBox>
+    </bottom>
+
+</BorderPane>
