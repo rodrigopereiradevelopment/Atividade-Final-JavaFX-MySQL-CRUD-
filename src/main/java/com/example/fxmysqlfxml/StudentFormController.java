@@ -152,4 +152,11 @@ public class StudentFormController {
         Alert a = new Alert(type);
         a.setTitle(t); a.setHeaderText(null); a.setContentText(m); a.showAndWait();
     }
+
+    public void setAluno(Student s) {
+    }
+
+    public Student getResultado() {
+        return null;
+    }
 }
