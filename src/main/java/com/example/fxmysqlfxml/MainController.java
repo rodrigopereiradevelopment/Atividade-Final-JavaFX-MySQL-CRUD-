@@ -40,7 +40,7 @@ public class MainController {
     @FXML
     public void initialize() {
         colIdAluno.setCellValueFactory(c -> new SimpleLongProperty(c.getValue().getId()==null?0:c.getValue().getId()).asObject());
-        colNomeAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getName()));
+        colNomeAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNome()));
         colEmailAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getEmail()));
         colSalaAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSala()));
         colModuloAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getModulo()));
