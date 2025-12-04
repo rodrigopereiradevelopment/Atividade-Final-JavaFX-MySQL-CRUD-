@@ -21,10 +21,10 @@ public class MainController {
     @FXML private TableColumn<Student, Long> colIdAluno;
     @FXML private TableColumn<Student, String> colNomeAluno;
     @FXML private TableColumn<Student, String> colEmailAluno;
-    @FXML private TableColumn<Student, String> colSalaAluno;
-    @FXML private TableColumn<Student, String> colModuloAluno;
-    @FXML private TableColumn<Student, String> colCursoAluno;
-
+    // DECLARAÇÕES CORRETAS (Conforme Student.java e MainView.fxml)
+    @FXML private TableColumn<Student, LocalDate> colBirthDateAluno; // Para Dt. Nasc.
+    @FXML private TableColumn<Student, String> colPhoneAluno;         // Para Telefone
+    @FXML private TableColumn<Student, Boolean> colActiveAluno;       // Para Ativo
     private final StudentDao sDao = new StudentDao();
     private final ObservableList<Student> sData = FXCollections.observableArrayList();
 
@@ -89,7 +89,7 @@ public class MainController {
             alert(Alert.AlertType.ERROR, "Seleção", "Selecione um aluno.");
             return;
         }
-        Student editado = showFormS(new Student(sel.getId(), sel.getNome(), sel.getEmail(), sel.getSala(), sel.getModulo(), sel.getCurso()));
+        Student editado = showFormS(new Student(sel.getId(), sel.getName(), sel.getEmail(), sel.getSala(), sel.getModulo(), sel.getCurso()));
         if (editado != null) {
             sDao.update(editado);
             int idx = sData.indexOf(sel);
