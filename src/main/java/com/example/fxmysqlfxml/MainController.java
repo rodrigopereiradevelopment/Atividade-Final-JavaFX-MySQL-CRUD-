@@ -79,6 +79,7 @@ public class MainController {
         }
     }
 
+    // No MainController.java
     @FXML
     private void sEditar() throws IOException {
         Student sel = tableAluno.getSelectionModel().getSelectedItem();
@@ -86,15 +87,34 @@ public class MainController {
             alert(Alert.AlertType.ERROR, "Seleção", "Selecione um aluno.");
             return;
         }
-        Student editado = showFormS(new Student(sel.getId(), sel.getNome(), sel.getEmail(), sel.getSala(), sel.getModulo(), sel.getCurso()));
+
+        // CORREÇÃO: Cria uma cópia usando setters para garantir que todos os 9 campos sejam incluídos.
+        Student copia = new Student();
+        copia.setId(sel.getId());
+        copia.setNome(sel.getNome());
+        copia.setEmail(sel.getEmail());
+
+        // Campos adicionais do DB:
+        copia.setBirthDate(sel.getBirthDate());
+        copia.setPhone(sel.getPhone());
+        copia.setActive(sel.getActive());
+
+        // Campos que estavam no construtor antigo:
+        copia.setSala(sel.getSala());
+        copia.setModulo(sel.getModulo());
+        copia.setCurso(sel.getCurso());
+
+        Student editado = showFormS(copia); // Passa a cópia completa para o formulário
+
+        // Continuação do método...
         if (editado != null) {
+            // Usa o objeto 'editado' retornado pelo formulário
             sDao.update(editado);
             int idx = sData.indexOf(sel);
             if (idx >= 0) sData.set(idx, editado);
             tableAluno.getSelectionModel().select(editado);
         }
     }
-
     @FXML
     private void tEditar() throws IOException {
         Teacher sel = tableProfessor.getSelectionModel().getSelectedItem();
@@ -154,7 +174,7 @@ public class MainController {
     }
 
     private Student showFormS(Student s) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StudentForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/fxmysqlfxml/StudentForm.fxml"));
         BorderPane pane = loader.load();
         StudentFormController controller = loader.getController();
         controller.setAluno(s);
