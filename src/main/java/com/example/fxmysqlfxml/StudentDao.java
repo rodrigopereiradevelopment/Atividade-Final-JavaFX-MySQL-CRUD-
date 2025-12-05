@@ -9,8 +9,8 @@ public class StudentDao {
 
     public List<Student> findAll() {
         List<Student> list = new ArrayList<>();
-        String sql = "SELECT id, nome, email, sala, modulo, curso FROM students ORDER BY id";
-        try (Connection c = Db.getConnection();
+        String sql = "SELECT id, nome, email, birth_date, telefone, active FROM students";
+               try (Connection c = Db.getConnection();
              PreparedStatement ps = c.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {

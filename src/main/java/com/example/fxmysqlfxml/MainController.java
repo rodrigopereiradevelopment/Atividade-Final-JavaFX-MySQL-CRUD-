@@ -1,6 +1,7 @@
 
 package com.example.fxmysqlfxml;
 
+import java.time.LocalDate;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -42,11 +43,7 @@ public class MainController {
         colIdAluno.setCellValueFactory(c -> new SimpleLongProperty(c.getValue().getId()==null?0:c.getValue().getId()).asObject());
         colNomeAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNome()));
         colEmailAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getEmail()));
-        colSalaAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSala()));
-        colModuloAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getModulo()));
-        colCursoAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getCurso()));
         tableAluno.setItems(sData);
-
         colIdProfessor.setCellValueFactory(c -> new SimpleLongProperty(c.getValue().getId()==null?0:c.getValue().getId()).asObject());
         colNomeProfessor.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNome()));
         colMateriaProfessor.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getMateria()));
@@ -89,7 +86,7 @@ public class MainController {
             alert(Alert.AlertType.ERROR, "Seleção", "Selecione um aluno.");
             return;
         }
-        Student editado = showFormS(new Student(sel.getId(), sel.getName(), sel.getEmail(), sel.getSala(), sel.getModulo(), sel.getCurso()));
+        Student editado = showFormS(new Student(sel.getId(), sel.getNome(), sel.getEmail(), sel.getSala(), sel.getModulo(), sel.getCurso()));
         if (editado != null) {
             sDao.update(editado);
             int idx = sData.indexOf(sel);
