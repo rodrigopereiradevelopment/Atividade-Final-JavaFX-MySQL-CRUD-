@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
 public class StudentFormController {
 
@@ -31,7 +32,7 @@ public class StudentFormController {
     public Student getResultado() { return resultado; }
 
     @FXML
-    private void sSalvar() {
+    private void sSalvar(ActionEvent event) {
         String nome = txtNome.getText().trim();
         String email = txtEmail.getText().trim();
         String sala = txtSala.getText().trim();
@@ -42,12 +43,28 @@ public class StudentFormController {
             return;
         }
         Long id = txtId.getText().isBlank() ? null : Long.parseLong(txtId.getText());
-        resultado = new Student(id, nome, email, sala, modulo, curso);
+
+        // CORREÇÃO 1: Usar o construtor vazio e setters
+        resultado = new Student();
+        resultado.setId(id);
+        resultado.setNome(nome);
+        resultado.setEmail(email);
+
+        // Campos que não estão no FXML (definir valores seguros para o DB)
+        resultado.setBirthDate(null);
+        resultado.setPhone("");
+        resultado.setActive(true);
+
+        // Campos que estão no FXML
+        resultado.setSala(sala);
+        resultado.setModulo(modulo);
+        resultado.setCurso(curso);
+
         fechar();
     }
 
     @FXML
-    private void sCancelar() {
+    private void sCancelar(ActionEvent event) {
         resultado = null;
         fechar();
     }
