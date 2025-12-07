@@ -45,11 +45,15 @@
                                          <columns>
                                              <TableColumn fx:id="colIdAluno" prefWidth="60.0" text="ID" />
                                              <TableColumn fx:id="colNomeAluno" prefWidth="180.0" text="Nome" />
-                                             <TableColumn fx:id="colEmailAluno" prefWidth="240.0" text="E-mail" />
+                                             <TableColumn fx:id="colEmailAluno" prefWidth="200.0" text="E-mail" />
 
                                              <TableColumn fx:id="colBirthDateAluno" prefWidth="100.0" text="Dt. Nasc." />
-                                             <TableColumn fx:id="colPhoneAluno" prefWidth="120.0" text="Telefone" />
-                                             <TableColumn fx:id="colActiveAluno" prefWidth="80.0" text="Ativo" />
+                                             <TableColumn fx:id="colPhoneAluno" prefWidth="100.0" text="Telefone" />
+                                             <TableColumn fx:id="colActiveAluno" prefWidth="60.0" text="Ativo" />
+
+                                             <TableColumn fx:id="colSalaAluno" prefWidth="80.0" text="Sala" />
+                                             <TableColumn fx:id="colModuloAluno" prefWidth="80.0" text="Módulo" />
+                                             <TableColumn fx:id="colCursoAluno" prefWidth="180.0" text="Curso" />
                                          </columns>
                                      </TableView>
 

@@ -1,6 +1,7 @@
 
 package com.example.fxmysqlfxml;
 
+import javafx.scene.control.cell.PropertyValueFactory; //
 import java.time.LocalDate;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -22,6 +23,9 @@ public class MainController {
     @FXML private TableColumn<Student, Long> colIdAluno;
     @FXML private TableColumn<Student, String> colNomeAluno;
     @FXML private TableColumn<Student, String> colEmailAluno;
+    @FXML private TableColumn<Student, String> colSalaAluno;
+    @FXML private TableColumn<Student, String> colModuloAluno;
+    @FXML private TableColumn<Student, String> colCursoAluno;
     // DECLARAÇÕES CORRETAS (Conforme Student.java e MainView.fxml)
     @FXML private TableColumn<Student, LocalDate> colBirthDateAluno; // Para Dt. Nasc.
     @FXML private TableColumn<Student, String> colPhoneAluno;         // Para Telefone
@@ -38,12 +42,28 @@ public class MainController {
     private final TeacherDao tDao = new TeacherDao();
     private final ObservableList<Teacher> tData = FXCollections.observableArrayList();
 
+    // No MainController.java (Método initialize)
     @FXML
     public void initialize() {
+        // 1. Mapeamentos para a Tabela de Alunos (Student)
         colIdAluno.setCellValueFactory(c -> new SimpleLongProperty(c.getValue().getId()==null?0:c.getValue().getId()).asObject());
         colNomeAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNome()));
         colEmailAluno.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getEmail()));
+
+        // Mapeamentos para os campos de 9 colunas (corrigidos)
+        // Usaremos PropertyValueFactory para os tipos simples e objetos
+        colBirthDateAluno.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+        colPhoneAluno.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        colActiveAluno.setCellValueFactory(new PropertyValueFactory<>("active"));
+
+        // NOVOS CAMPOS DO FXML:
+        colSalaAluno.setCellValueFactory(new PropertyValueFactory<>("sala"));
+        colModuloAluno.setCellValueFactory(new PropertyValueFactory<>("modulo"));
+        colCursoAluno.setCellValueFactory(new PropertyValueFactory<>("curso"));
+
         tableAluno.setItems(sData);
+
+        // 2. Mapeamentos para a Tabela de Professores (Teacher)
         colIdProfessor.setCellValueFactory(c -> new SimpleLongProperty(c.getValue().getId()==null?0:c.getValue().getId()).asObject());
         colNomeProfessor.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getNome()));
         colMateriaProfessor.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getMateria()));
@@ -80,6 +100,7 @@ public class MainController {
     }
 
     // No MainController.java
+    // No MainController.java
     @FXML
     private void sEditar() throws IOException {
         Student sel = tableAluno.getSelectionModel().getSelectedItem();
@@ -88,7 +109,7 @@ public class MainController {
             return;
         }
 
-        // CORREÇÃO: Cria uma cópia usando setters para garantir que todos os 9 campos sejam incluídos.
+        // Cria uma cópia usando setters para garantir que todos os 9 campos sejam incluídos (CORRETO).
         Student copia = new Student();
         copia.setId(sel.getId());
         copia.setNome(sel.getNome());
@@ -108,11 +129,23 @@ public class MainController {
 
         // Continuação do método...
         if (editado != null) {
-            // Usa o objeto 'editado' retornado pelo formulário
-            sDao.update(editado);
-            int idx = sData.indexOf(sel);
-            if (idx >= 0) sData.set(idx, editado);
-            tableAluno.getSelectionModel().select(editado);
+            try {
+                // Usa o objeto 'editado' retornado pelo formulário
+                sDao.update(editado); // <-- ESTE CÓDIGO PODE LANÇAR RuntimeException
+
+                // Se o update foi bem-sucedido:
+                int idx = sData.indexOf(sel);
+                if (idx >= 0) sData.set(idx, editado);
+                tableAluno.getSelectionModel().select(editado);
+
+                // Opcional: Alerta de sucesso
+                alert(Alert.AlertType.INFORMATION, "Sucesso", "Aluno atualizado com sucesso!");
+
+            } catch (RuntimeException e) {
+                // Se o DAO falhar (ex: por causa de NOT NULL ou conversão de data/telefone):
+                // O getMessage() deve conter a mensagem de erro do SQLException
+                alert(Alert.AlertType.ERROR, "Erro no Banco de Dados", "Falha ao atualizar o aluno. Detalhe: " + e.getMessage());
+            }
         }
     }
     @FXML
